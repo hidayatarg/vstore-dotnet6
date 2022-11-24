@@ -17,6 +17,9 @@ builder.Services.AddDbContext<StoreContext>(x =>
     x.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
 });
 
+// cors
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,6 +33,12 @@ if (app.Environment.IsDevelopment())
 
     app.UseItToSeedSqlServer();    
 }
+
+// cors order
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+});
 
 app.UseAuthorization();
 

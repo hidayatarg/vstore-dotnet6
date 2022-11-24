@@ -13,7 +13,7 @@ ca520f93c10647b9bdfc425d4f0c739977f011ad112b0d61db9f490943465ac9`
   }, [])
 ```
 
-### Render On every Reload
+### Render On EndlessLoop
 ```js
   useEffect(()=> {
     fetch('http://localhost:5161/api/Product')
