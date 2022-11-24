@@ -4,8 +4,11 @@ namespace vStore.API.Data
 {
     public class StoreSeed
     {
+        // Injected during the runtime
+        // method Injection
         public static void Seed(StoreContext context)
         {
+            context.Database.EnsureCreated();
             if (!context.Products.Any())
             {
                 var products = new List<Product>

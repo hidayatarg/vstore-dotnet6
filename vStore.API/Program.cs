@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using vStore.API.Data;
+using vStore.API.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    //custom extension method to seed the DB
+    //configure other services
+
+    app.UseItToSeedSqlServer();    
 }
 
 app.UseAuthorization();
