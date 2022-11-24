@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using vStore.API.Data;
 using vStore.API.Entities;
 
@@ -16,26 +17,24 @@ namespace vStore.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Product>> GetProducts()
+        public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            var items =  _storeConext.Products.ToList();
+            var items = await _storeConext.Products.ToListAsync();
             return Ok(items);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Product> GetProduct(int id)
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
             if (id <= 0)
                 return BadRequest();
 
-            var item = _storeConext.Products.FirstOrDefault(p => p.Id == id);
+            var item = await _storeConext.Products.FirstOrDefaultAsync(p => p.Id == id);
             
             if (item == null)
                 return NotFound();
             
             return Ok(item);
         }
-
-
     }
 }
