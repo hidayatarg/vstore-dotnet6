@@ -25,7 +25,7 @@ function App() {
   return (
     <div>
       <h1>React vStore App</h1>
-      <Catalog products={products}/>
+      <Catalog products={products} addProduct={addProduct} />
       
     </div>
   );
