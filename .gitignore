@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 vStore.API/appsettings.json
 vStore.API/Properties/launchSettings.json
+.DS_Store
