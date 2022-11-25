@@ -10,12 +10,8 @@ interface Props {
 export default function catalog({products, addProduct}: Props) {
     return (
         <>
-            <h3>Products</h3>
             <ProductList products={products}/>
             <Button variant="contained" onClick={addProduct}>Add Product</Button>
-
-
         </>
-
     )
 }

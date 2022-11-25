@@ -1,7 +1,9 @@
-import { Typography } from '@mui/material';
+import { CssBaseline } from '@mui/material';
+import { Container } from '@mui/system';
 import { useEffect, useState } from 'react';
 import Catalog from '../../features/catalog/Catalog';
 import { Product } from '../models/product';
+import Header from './Header';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -24,11 +26,13 @@ function App() {
     }]);
   }
   return (
-    <div>
-      <Typography variant='h2'>React vStore App</Typography>
-      <Catalog products={products} addProduct={addProduct} />
-      
-    </div>
+    <>
+      <CssBaseline />
+      <Header />
+      <Container>
+        <Catalog products={products} addProduct={addProduct} />
+      </Container>
+    </>
   );
 }
 
