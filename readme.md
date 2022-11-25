@@ -5,6 +5,9 @@ or for latest
 
 `docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=yourStrong12*?AF" -e "MSSQL_PID=Express" -p 1433:1433 --name=vstoredbsql  mcr.microsoft.com/mssql/server:latest`
 
+to run docker container
+
+`docker run vstoredbsql`
 
 
 
