@@ -10,6 +10,12 @@ to run docker container
 `docker run vstoredbsql`
 
 
+File Soruce
+`Directory.GetParent(Directory.GetCurrentDirectory())`
+
+`Directory.GetDirectoryRoot(Directory.GetCurrentDirectory())`
+
+
 
 ## React
 ### Render Once
