@@ -7,7 +7,6 @@ interface Props {
 }
 
 export default function ProductList({products}: Props) {
-	console.log('products: ', products);
 	return (
 		<>
 			<Grid container spacing={4} sx={{mb: 2}}>
