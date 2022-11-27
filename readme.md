@@ -35,3 +35,7 @@ File Soruce
       .then(data => setProducts(data))
   })
 ```
+
+### React Router
+Required library to install and the community have the type defination file we can get as shown below.
+- `npm install react-router-dom@5.3.0 @types/react-router-dom@5.3.2`
