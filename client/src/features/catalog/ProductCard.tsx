@@ -1,38 +1,42 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from '@mui/material';
 import { Product } from '../../app/models/product';
 
 interface Props {
-    product: Product
+  product: Product
 }
 
-export default function ProductCard({product}: Props) {
-	return (
-		// <ListItem key={product.id}>
-		// 	<ListItemAvatar>
-		// 		<Avatar src={product.pictureUrl} />
-		// 	</ListItemAvatar>
-		// 	{product.name} - {product.price}
-		// </ListItem>
-		<Card sx={{ maxWidth: 345 }}>
+export default function ProductCard({ product }: Props) {
+  return (
+    <Card sx={{ maxWidth: 345 }}>
+      <CardHeader
+        avatar={
+          <Avatar>
+            {product.name.charAt(0).toLocaleUpperCase()}
+          </Avatar>
+        }
+        title={product.name}
+      // title properties
+      // titleTypographyProps={{
+      //   sx: {fontWeight: 'bold', fontSize: '10px'}
+      // }}
+      />
       <CardMedia
-        component="img"
-        height="140"
-        image="http://picsum.photos/200"
-        alt="green iguana"
+        sx={{ height: 140, backgroundSize: 'contain' }}
+        image={product.pictureUrl}
+        title={product.name}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
+        <Typography gutterBottom color="secondary" variant="h5">
+          $ {(product.price/100).toFixed(2)}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {product.brand} / {product.type}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small">Add to Cart</Button>
+        <Button size="small">View</Button>
       </CardActions>
     </Card>
-	);
+  );
 }
