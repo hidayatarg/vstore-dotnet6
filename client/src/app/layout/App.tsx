@@ -31,10 +31,10 @@ function App() {
       <Container>
         {/* <Catalog /> */}
         <Route exact path='/' component={HomePage} />
-        <Route path='/catalog' component={Catalog} />
-        <Route path='/catalog/:id' component={ProductDetails} />
-        <Route path='/about' component={AboutPage} />
-        <Route path='/contact' component={ContactPage} />
+        <Route exact path='/catalog' component={Catalog} />
+        <Route exact path='/catalog/:id' component={ProductDetails} />
+        <Route exact path='/about' component={AboutPage} />
+        <Route exact path='/contact' component={ContactPage} />
       </Container>
     </ThemeProvider>
   );
