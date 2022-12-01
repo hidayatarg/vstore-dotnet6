@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using vStore.API.Data;
 using vStore.API.Extension;
+using vStore.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,9 @@ app.UseCors(opt =>
 {
     opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
 });
+
+// global exception handler
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthorization();
 
