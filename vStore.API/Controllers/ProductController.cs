@@ -5,9 +5,7 @@ using vStore.API.Entities;
 
 namespace vStore.API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductController : ControllerBase
+    public class ProductController : BaseApiController
     {
         private readonly StoreContext _storeConext;
 
