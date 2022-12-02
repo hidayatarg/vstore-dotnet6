@@ -8,9 +8,18 @@ axios.interceptors.response.use(response => {
     return response
 }, (error: AxiosError) => {
     // ! override Axios Error here only
-    const {data, status}:any = error.response!;
+    const {data, status}:any = error?.response!;
     switch (status) {
         case 400:
+            if (data.errors) {
+                const modelStateErors: string[] = [];
+                for (const key in data.errors) {
+                    if (data.errors[key]) {
+                        modelStateErors.push(data.errors[key]);
+                    }
+                }
+                throw modelStateErors.flat();
+            }
             toast.error(data.title);
             break;
         case 404:
