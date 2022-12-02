@@ -17,11 +17,11 @@ const Catalog = {
 }
 
 const TestErrors = {
-    get400Error: () => axios.get('buggy/bad-request'),
-    get401Error: () => axios.get('buggy/unauthorised'),
-    get404Error: () => axios.get('buggy/not-found'),
-    get500Error: () => axios.get('buggy/server-error'),
-    getValidationError: () => axios.get('buggy/validation-error'),
+    get400Error: () => request.get('buggy/bad-request'),
+    get401Error: () => request.get('buggy/unauthorised'),
+    get404Error: () => request.get('buggy/not-found'),
+    get500Error: () => request.get('buggy/server-error'),
+    getValidationError: () => request.get('buggy/validation-error'),
 }
 
 const agent = {

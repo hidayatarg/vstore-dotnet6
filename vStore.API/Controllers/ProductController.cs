@@ -18,7 +18,7 @@ namespace vStore.API.Controllers
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
             var items = await _storeConext.Products.ToListAsync();
-            return Ok(items);
+            return items;
         }
 
         [HttpGet("{id}")]
@@ -32,7 +32,7 @@ namespace vStore.API.Controllers
             if (item == null)
                 return NotFound();
             
-            return Ok(item);
+            return item;
         }
     }
 }
