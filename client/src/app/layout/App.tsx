@@ -11,6 +11,7 @@ import ProductDetails from '../../features/catalog/ProductDetails';
 import Catalog from '../../features/catalog/Catalog';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ServerError from '../errors/ServerError';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -38,6 +39,7 @@ function App() {
         <Route exact path='/catalog/:id' component={ProductDetails} />
         <Route exact path='/about' component={AboutPage} />
         <Route exact path='/contact' component={ContactPage} />
+        <Route exact path='/server-error' component={ServerError} />
       </Container>
     </ThemeProvider>
   );
