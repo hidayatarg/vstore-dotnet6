@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Product } from '../../app/models/product';
 import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material';
 import agent from '../../app/api/agent';
+import Loading from '../../app/layout/Loading';
 
 export default function ProductDetails() {
   const { id } = useParams<{ id: string }>();
@@ -17,7 +18,7 @@ export default function ProductDetails() {
 
   }, [id])
 
-  if (loading) return <h3>Loading...</h3>
+  if (loading) return <Loading  message="Loading product..."/>
 
   if (!product) return <h3>Product not found</h3>
 

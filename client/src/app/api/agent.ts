@@ -4,8 +4,10 @@ import { history } from '../..';
 
 axios.defaults.baseURL = 'http://localhost:5000/api/';
 
+const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
 // intercept the error when we get from api server
-axios.interceptors.response.use(response => {
+axios.interceptors.response.use( async response => {
+    await sleep();
     return response
 }, (error: AxiosError) => {
     // ! override Axios Error here only
