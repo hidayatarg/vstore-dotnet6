@@ -34,7 +34,7 @@ namespace vStore.API.Controllers
                 .FirstOrDefaultAsync(x => x.BuyerId == Request.Cookies["buyerId"]);
         }
 
-        [HttpPost]
+        [HttpPost] // api/basket?productId=3&quantity=2
         public async Task<ActionResult> AddItemToBasket(int productId, int quantity)
         {
             var basket = await RetrieveBasket();
