@@ -17,13 +17,17 @@ namespace vStore.API.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetBasket")]
         public async Task<ActionResult<BasketDto>> GetBasket()
         {
             var basket = await RetrieveBasket();
 
             if (basket == null) return NotFound();
+            return MapBasketToBasketDto(basket);
+        }
 
+        private static ActionResult<BasketDto> MapBasketToBasketDto(Basket basket)
+        {
             return new BasketDto
             {
                 Id = basket.Id,
@@ -50,7 +54,7 @@ namespace vStore.API.Controllers
         }
 
         [HttpPost] // api/basket?productId=3&quantity=2
-        public async Task<ActionResult> AddItemToBasket(int productId, int quantity)
+        public async Task<ActionResult<BasketDto>> AddItemToBasket(int productId, int quantity)
         {
             var basket = await RetrieveBasket();
             if (basket == null) basket = CreateBasket();
@@ -62,7 +66,7 @@ namespace vStore.API.Controllers
             
             // save changes
             var result = await _context.SaveChangesAsync() > 0;
-            if (result) return StatusCode(201);
+            if (result) return CreatedAtRoute("GetBasket", MapBasketToBasketDto(basket));
             
             return BadRequest(new ProblemDetails { Title = "Problem saving item to basket" });
         }
