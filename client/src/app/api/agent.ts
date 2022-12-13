@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { history } from '../..';
 
 axios.defaults.baseURL = 'http://localhost:5000/api/';
+axios.defaults.withCredentials = true;
 
 const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
 // intercept the error when we get from api server
@@ -66,9 +67,17 @@ const TestErrors = {
     getValidationError: () => request.get('buggy/validation-error'),
 }
 
+const Basket = {
+    get: () => request.get('basket'),
+    // using querystring so body {}
+    addItem: (productId: number, quantity = 1) => request.post(`basket?productId=${productId}&quantity=${quantity}`,{}),
+    removeItem: (productId: number, quantity = 1) => request.delete(`basket?productId=${productId}&quantity=${quantity}`)
+}
+
 const agent = {
     Catalog,
-    TestErrors
+    TestErrors,
+    Basket
 }
 
 export default agent;
