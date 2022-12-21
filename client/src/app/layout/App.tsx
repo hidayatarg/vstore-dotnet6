@@ -2,7 +2,7 @@ import { ThemeProvider } from '@emotion/react';
 import { createTheme, CssBaseline } from '@mui/material';
 import { Container } from '@mui/system';
 import Header from './Header';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from '../../features/home/HomePage';
 import AboutPage from '../../features/about/AboutPage';
@@ -14,8 +14,26 @@ import 'react-toastify/dist/ReactToastify.css';
 import ServerError from '../errors/ServerError';
 import NotFound from '../errors/NotFound';
 import BasketPage from '../../features/basket/BasketPage';
+import { useStoreContext } from '../context/StoreContext';
+import { getCookie } from '../util/util';
+import agent from '../api/agent';
+import Loading from './Loading';
 
 function App() {
+  const { setBasket } = useStoreContext();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const buyerId = getCookie('buyerId');
+    if (buyerId) {
+      agent.Basket.get()
+        .then(basket => setBasket(basket))
+        .catch(error => console.log(error))
+        .finally(() => setLoading(false));
+    }
+    // dependency ----> set basket
+  }, [setBasket])
+  
   const [darkMode, setDarkMode] = useState(false);
   const paletteType = darkMode ? 'dark' : 'light';
   const theme = createTheme({
@@ -28,6 +46,9 @@ function App() {
   function handleThemeChange() {
     setDarkMode(!darkMode);
   }
+ 
+  // show loading while fetching data
+  if (loading) return <Loading  message="Initializing..."/>
   
   return (
     <ThemeProvider theme={theme}>
@@ -52,5 +73,7 @@ function App() {
 }
 
 export default App;
+
+
 
 
