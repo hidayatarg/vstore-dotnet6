@@ -1,0 +1,20 @@
+version: '3.6'
+### get network
+### ifconfig -l | xargs -n1 ipconfig getifaddr
+networks:
+  app-tier:
+    driver: bridge
+    
+services: 
+    mssql:
+        image: 'mcr.microsoft.com/mssql/server'
+        restart: always
+        ports:
+            - '1433:1433'
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=Secret1234
+        networks:
+          - app-tier    
+        volumes:
+            - './drive:/var/opt/mssql'
