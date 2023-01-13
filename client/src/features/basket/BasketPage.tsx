@@ -56,7 +56,7 @@ export default function BasketPage() {
                 </Box>
               </TableCell>
               <TableCell align="right">$ {(row.price / 100).toFixed(2)}</TableCell>
-              <TableCell align="right">
+              <TableCell align="center">
                 <LoadingButton 
                   loading={status.loading && status.name === 'rem' + row.productId}
                   onClick={() => handleRemoveItem(row.productId, 1, 'rem' + row.productId)}
