@@ -23,10 +23,10 @@ namespace vStore.API.Controllers
             var basket = await RetrieveBasket();
 
             if (basket == null) return NotFound();
-            return MapBasketToBasketDto(basket);
+            return MapBasketToDto(basket);
         }
 
-        private static ActionResult<BasketDto> MapBasketToBasketDto(Basket basket)
+        private static BasketDto MapBasketToDto(Basket basket)
         {
             return new BasketDto
             {
@@ -40,7 +40,7 @@ namespace vStore.API.Controllers
                     PictureUrl = item.Product.PictureUrl,
                     Type = item.Product.Type,
                     Brand = item.Product.Brand,
-                    Quantity = item.Quantity,
+                    Quantity = item.Quantity
                 }).ToList()
             };
         }
@@ -66,7 +66,7 @@ namespace vStore.API.Controllers
             
             // save changes
             var result = await _context.SaveChangesAsync() > 0;
-            if (result) return CreatedAtRoute("GetBasket", MapBasketToBasketDto(basket));
+            if (result) return CreatedAtRoute("GetBasket", MapBasketToDto(basket));
             
             return BadRequest(new ProblemDetails { Title = "Problem saving item to basket" });
         }
