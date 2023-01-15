@@ -18,6 +18,7 @@ import { useStoreContext } from '../context/StoreContext';
 import { getCookie } from '../util/util';
 import agent from '../api/agent';
 import Loading from './Loading';
+import CheckoutPage from '../../features/checkout/CheckoutPage';
 
 function App() {
   const { setBasket } = useStoreContext();
@@ -67,6 +68,7 @@ function App() {
         <Route exact path='/contact' component={ContactPage} />
         <Route exact path='/server-error' component={ServerError} />
         <Route exact path='/basket' component={BasketPage} />
+        <Route exact path='/checkout' component={CheckoutPage} />
         <Route path='*' component={NotFound} />
         </Switch>
       </Container>
