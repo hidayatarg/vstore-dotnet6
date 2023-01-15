@@ -6,6 +6,11 @@ import './app/layout/styles.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserHistory } from 'history';
 import { StoreProvider } from './app/context/StoreContext';
+import { configureStore } from './app/store/configureStore';
+
+const store = configureStore();
+
+console.log(store.getState())
 
 export const history = createBrowserHistory();
 
