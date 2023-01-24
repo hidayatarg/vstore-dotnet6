@@ -36,7 +36,7 @@ function App() {
       setLoading(false);
     }
     // dependency ----> set basket
-  }, [setBasket])
+  }, [dispatch])
   
   const [darkMode, setDarkMode] = useState(false);
   const paletteType = darkMode ? 'dark' : 'light';
