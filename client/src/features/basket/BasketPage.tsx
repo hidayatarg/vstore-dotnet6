@@ -44,8 +44,8 @@ export default function BasketPage() {
                 <TableCell align="right">$ {(row.price / 100).toFixed(2)}</TableCell>
                 <TableCell align="center">
                   <LoadingButton 
-                    loading={status === 'pendingRemoveItem' + row.productId}
-                    onClick={() => dispatch(removeBasketItemAync({productId: row.productId, quantity: 1}))}
+                    loading={status === 'pendingRemoveItem' + row.productId + 'rem'}
+                    onClick={() => dispatch(removeBasketItemAync({productId: row.productId, quantity: 1, name: 'rem'}))}
                     color='error'
                   >
                       <Remove />
@@ -62,8 +62,10 @@ export default function BasketPage() {
                 <TableCell align="right">$ {(row.quantity * (row.price / 100)).toFixed(2)}</TableCell>
                 <TableCell align="right">
                   <LoadingButton 
-                    loading={status ==='pendingRemoveItem' + row.productId}
-                    onClick={() => dispatch(removeBasketItemAync({productId: row.productId, quantity: row.quantity}))}
+                    loading={status ==='pendingRemoveItem' + row.productId + 'del'}
+                    onClick={() => dispatch(removeBasketItemAync({
+                      productId: row.productId, quantity: row.quantity, name: 'del'
+                    }))}
                     color='error'
                   >
                     <Delete />

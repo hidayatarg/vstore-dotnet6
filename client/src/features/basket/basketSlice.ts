@@ -25,7 +25,7 @@ export const addBasketItemAync = createAsyncThunk<Basket, {productId: number, qu
 )
 
 // it will return void
-export const removeBasketItemAync = createAsyncThunk<void, {productId: number, quantity: number}>(
+export const removeBasketItemAync = createAsyncThunk<void, {productId: number, quantity: number, name?: string}>(
     'basket/removeBasketItemAsync',
    async ({productId, quantity}) => {
         try {
@@ -62,7 +62,7 @@ export const basketSlice = createSlice({
         // removeItemActions
         builder.addCase(removeBasketItemAync.pending, (state, action) => {
             console.log(action);
-            state.status = 'pendingRemoveItem' + action.meta.arg.productId;
+            state.status = 'pendingRemoveItem' + action.meta.arg.productId + action.meta.arg.name;
         });
         builder.addCase(removeBasketItemAync.fulfilled, (state, action) => {
             const {productId, quantity} = action.meta.arg;
