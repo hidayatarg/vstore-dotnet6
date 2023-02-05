@@ -12,9 +12,10 @@ const initialState: BasketState = {
     status: 'idle'
 }
 
-export const addBasketItemAync = createAsyncThunk<Basket, {productId: number, quantity: number}>(
+// thunk is used to create async requests
+export const addBasketItemAync = createAsyncThunk<Basket, {productId: number, quantity?: number}>(
     'basket/addBasketItemAsync',
-   async ({productId, quantity}) => {
+   async ({productId, quantity = 1}) => {
         try {
             return await agent.Basket.addItem(productId, quantity);
         } catch (error) {
@@ -45,17 +46,18 @@ export const basketSlice = createSlice({
                 
         }
     },
-
+    // extra for the global actionscreators addBasketItemAync with thunk
     extraReducers: (builder => {
         builder.addCase(addBasketItemAync.pending, (state, action) => {
             console.log(action);
-            state.status = 'pendingAddItem';
+            state.status = 'pendingAddItem' + action.meta.arg.productId;
         });
         builder.addCase(addBasketItemAync.fulfilled, (state, action) => {
             console.log(action);
+            state.basket = action.payload;
             state.status = 'idle';
         });
-        builder.addCase(addBasketItemAync.rejected, (state, action) => {
+        builder.addCase(addBasketItemAync.rejected, (state) => {
             state.status = 'idle';
         });
     })

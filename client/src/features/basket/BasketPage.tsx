@@ -9,6 +9,7 @@ import { removeItem, setBasket } from './basketSlice';
 import BasketSummary from './BasketSummary';
 
 export default function BasketPage() {
+  // basket from redux state
   const { basket } = useAppSelector(state => state.basket);
   const dispatch = useAppDispatch();
   const [status, setStatus] = useState({
