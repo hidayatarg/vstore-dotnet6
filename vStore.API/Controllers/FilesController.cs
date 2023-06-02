@@ -43,5 +43,45 @@ namespace vStore.API.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost("Download/{id}")]
+        public async Task<ActionResult> Download(int id)
+        {
+            var result = new List<FileUploadResult>();
+            var filePath = Path.Combine(@"UploadedFiles", id.ToString(), @"files");
+            var files = Directory.GetFiles(filePath);
+
+            foreach (var file in files)
+            {
+                var fileInfo = new FileInfo(file);
+                result.Add(new FileUploadResult { FileName = fileInfo.Name, FileSize = fileInfo.Length });
+            }
+
+            _logger.LogInformation($"The files for [{id}] was downloaded.].");
+
+            return Ok(result);
+        }
+
+
+        [HttpGet("Download/{id}/{fileName}")]
+        public async Task<ActionResult> GetFileById(int id, string fileName)
+        {
+            var filePath = Path.Combine(@"UploadedFiles", id.ToString(), @"files", fileName);
+            var fileInfo = new FileInfo(filePath);
+
+            if (!fileInfo.Exists)
+                return NotFound();
+
+            var memory = new MemoryStream();
+            await using var stream = new FileStream(filePath, FileMode.Open);
+            await stream.CopyToAsync(memory);
+            memory.Position = 0;
+
+            _logger.LogInformation($"The file [{fileName}] for [{id}] was downloaded.].");
+
+            return File(memory, Path.GetFileName(filePath));
+        }
+
+
     }
 }
